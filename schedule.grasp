@@ -1,0 +1,33 @@
+newTask task0 -priority 3 -name "Task 0" 
+newTask task1 -priority 2 -name "Task 1" 
+newTask task2 -priority 1 -name "Task 2" 
+plot 0 jobArrived job0.0 task0 
+plot 0 jobArrived job1.0 task1 
+plot 0 jobArrived job2.0 task2 
+plot 0 jobResumed job0.0 
+plot 20 jobCompleted job0.0 
+plot 20 jobResumed job1.0 
+plot 40 jobCompleted job1.0 
+plot 40 jobResumed job2.0 
+plot 70 jobArrived job0.1 task0 
+plot 70 jobPreempted job2.0 -target job0.1 
+plot 70 jobResumed job0.1 
+plot 80 jobArrived job1.1 task1 
+plot 90 jobCompleted job0.1 
+plot 90 jobResumed job2.0 
+plot 95 jobCompleted job2.0 
+plot 95 jobResumed job1.1 
+plot 115 jobCompleted job1.1 
+plot 140 jobArrived job0.2 task0 
+plot 140 jobResumed job0.2 
+plot 160 jobCompleted job0.2 
+plot 160 jobArrived job1.2 task1 
+plot 160 jobResumed job1.2 
+plot 180 jobCompleted job1.2 
+plot 50 jobDeadline job0.0 
+plot 190 jobDeadline job0.1 
+plot 330 jobDeadline job0.2 
+plot 80 jobDeadline job1.0 
+plot 240 jobDeadline job1.1 
+plot 400 jobDeadline job1.2 
+plot 100 jobDeadline job2.0 
