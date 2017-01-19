@@ -1,8 +1,8 @@
 import sys, os
-
+import json
 
 GRASP_NAME = "schedule.grasp"
-
+JSON_NAME = "schedule.json"
 TASK_PROPERTIES = ["CompTime", "Period", "Deadline", "Priority", "Threshold"]
 
 PROP = {}
@@ -35,6 +35,9 @@ class Scheduler():
 		self.__graspFile = open(GRASP_NAME, 'w')
 		self.__preemptedJobs = []
 		self.__graspDeadlines = []
+		self.__json = []
+		
+
 
 	def WriteToGrasp(self):
 
@@ -52,21 +55,43 @@ class Scheduler():
 			line_temp = line_temp + "\n"
 			self.__graspFile.write(line_temp)
 
-		# for line in self.__graspDeadlines:
-		# 	line_temp = ""
-		# 	for item in line:
-		# 		line_temp = line_temp + str(item) + " "
-		# 	line_temp = line_temp + "\n"
-		# 	self.__graspFile.write(line_temp)
+		for line in self.__graspDeadlines:
+			line_temp = ""
+			for item in line:
+				line_temp = line_temp + str(item) + " "
+			line_temp = line_temp + "\n"
+			self.__graspFile.write(line_temp)
 
 		self.__graspFile.close()
 
+	def WriteDataToJson(self):
+
+		# Create a dictionary for dumping into json
+
+		jsonDict = {}
+
+		for event in self.__json:
+			eventKey = "Item"+str(self.__json.index(event))
+			eventDict = {}
+			eventDict["Time"] = event[0]
+			eventDict["Event"] = event[1]
+			eventDict["Task"] = event[2]
+			jsonDict[eventKey] = eventDict
+
+		jsonData = json.dumps(jsonDict)
+		print(jsonData)
+		with open( JSON_NAME, 'w') as f:
+			json.dump(jsonData, f)
 
 	def GetJsonDataFromApp(self):
 
 		#Do the stuff for getting the data from JSON
-
 		##
+
+		# with open('input.json', 'r') as x:
+		# 	readJson = json.load(x)
+
+		# print (readJson)
 
 		# The final data must look like this
 		#						Comp 	Period	Dead 	Prio 	Thres 					
@@ -202,6 +227,10 @@ class Scheduler():
 											"jobCompleted", 
 											"job"+str(self.__jobs[self.__currJob][PARAM["JobName"]])
 											])
+					self.__json.append([ t,
+										 "STOP",
+										 str(self.__jobs[self.__currJob][PARAM["TaskID"]])	
+										])
 					# Set currently executing job to none (-1)
 					self.__currJob = -1
 
@@ -214,6 +243,7 @@ class Scheduler():
 											 "job"+ str(self.__jobs[item][PARAM["JobName"]]), 
 											 "task"+str(self.__jobs[item][PARAM["TaskID"]])
 											 ])
+
 
 			# Find already active tasks
 			self.FindActive(t)
@@ -243,6 +273,10 @@ class Scheduler():
 											 "jobResumed",
 											 "job"+str(self.__jobs[self.__currJob][PARAM["JobName"]])
 											])
+				self.__json.append([ t,
+									 "START",
+									 str(self.__jobs[self.__currJob][PARAM["TaskID"]])
+									])
 
 			## If tasks are running and there are new activations, check priority and threshold 
 			## Preempt if needed
@@ -258,17 +292,25 @@ class Scheduler():
 										 "-target", 
 										 "job"+ str(self.__jobs[hpj][PARAM["JobName"]])
 										 ])
+					self.__json.append([t,
+										"STOP",
+										str(self.__jobs[self.__currJob][PARAM["TaskID"]])
+										])
 					self.__preemptedJobs.append(self.__currJob)
 					self.__currJob = hpj
 					self.__schedule.append([ "plot "+str(t),
 									 "jobResumed",
 									 "job"+str(self.__jobs[self.__currJob][PARAM["JobName"]])
 									])
+					self.__json.append([t,
+										"START",
+										str(self.__jobs[self.__currJob][PARAM["TaskID"]])
+										])
 
 						
 
 
-		print (self.__schedule)
+		print (self.__json)
 
 if __name__ == '__main__':
 
@@ -276,9 +318,10 @@ if __name__ == '__main__':
 	schedObj.GetJsonDataFromApp()
 	schedObj.CreateGraspHeader()
 	schedObj.SplitTasksToJobs()
-	# schedObj.CreateGraspDeadlines()
+	schedObj.CreateGraspDeadlines()
 	schedObj.FindPreemptionPoints()
 	schedObj.Scheduler()
 	schedObj.WriteToGrasp()
+	schedObj.WriteDataToJson()
 
 	
