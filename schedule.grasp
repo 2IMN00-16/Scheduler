@@ -24,10 +24,53 @@ plot 160 jobCompleted job0.2
 plot 160 jobArrived job1.2 task1 
 plot 160 jobResumed job1.2 
 plot 180 jobCompleted job1.2 
+plot 200 jobArrived job2.1 task2 
+plot 200 jobResumed job2.1 
+plot 210 jobArrived job0.3 task0 
+plot 210 jobPreempted job2.1 -target job0.3 
+plot 210 jobResumed job0.3 
+plot 230 jobCompleted job0.3 
+plot 230 jobResumed job2.1 
+plot 240 jobArrived job1.3 task1 
+plot 255 jobCompleted job2.1 
+plot 255 jobResumed job1.3 
+plot 275 jobCompleted job1.3 
+plot 280 jobArrived job0.4 task0 
+plot 280 jobResumed job0.4 
+plot 300 jobCompleted job0.4 
+plot 320 jobArrived job1.4 task1 
+plot 320 jobResumed job1.4 
+plot 340 jobCompleted job1.4 
+plot 350 jobArrived job0.5 task0 
+plot 350 jobResumed job0.5 
+plot 370 jobCompleted job0.5 
+plot 400 jobArrived job1.5 task1 
+plot 400 jobArrived job2.2 task2 
+plot 400 jobResumed job1.5 
+plot 420 jobCompleted job1.5 
+plot 420 jobArrived job0.6 task0 
+plot 420 jobResumed job0.6 
+plot 440 jobCompleted job0.6 
+plot 440 jobResumed job2.2 
+plot 475 jobCompleted job2.2 
+plot 480 jobArrived job1.6 task1 
+plot 480 jobResumed job1.6 
+plot 490 jobArrived job0.7 task0 
 plot 50 jobDeadline job0.0 
 plot 190 jobDeadline job0.1 
 plot 330 jobDeadline job0.2 
+plot 470 jobDeadline job0.3 
+plot 610 jobDeadline job0.4 
+plot 750 jobDeadline job0.5 
+plot 890 jobDeadline job0.6 
+plot 1030 jobDeadline job0.7 
 plot 80 jobDeadline job1.0 
 plot 240 jobDeadline job1.1 
 plot 400 jobDeadline job1.2 
+plot 560 jobDeadline job1.3 
+plot 720 jobDeadline job1.4 
+plot 880 jobDeadline job1.5 
+plot 1040 jobDeadline job1.6 
 plot 100 jobDeadline job2.0 
+plot 500 jobDeadline job2.1 
+plot 900 jobDeadline job2.2 
