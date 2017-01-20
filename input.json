@@ -1,0 +1,29 @@
+{
+	"Tasks": [ 
+		{
+			"Name": "Task 1",
+			"Priority": 3,
+			"Computation": 20,
+			"Period": 70,
+			"Deadline": 50,
+			"Threshold": 3
+		},
+		{
+			"Name": "Task 2",
+			"Priority": 2,
+			"Computation": 20,
+			"Period": 80,
+			"Deadline": 80,
+			"Threshold": 3
+		},
+		{
+			"Name": "Task 3",
+			"Priority": 1,
+			"Computation": 35,
+			"Period": 200,
+			"Deadline": 100,
+			"Threshold": 2
+		}
+	],
+	"Duration" : 500
+}
