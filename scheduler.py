@@ -123,7 +123,7 @@ class Scheduler():
 									"newTask", 
 									"task"+str(self.__taskJson.index(task)),
 									"-priority "+str(task[PROP["Priority"]]),
-									"-name "+"\"Task "+str(self.__taskJson.index(task))+"\""
+									"-name "+"\""+self.__taskMapping[self.__taskJson.index(task)]+"\""
 									])
 
 	def CreateGraspDeadlines(self):
