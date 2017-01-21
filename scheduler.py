@@ -157,10 +157,11 @@ class Scheduler():
 				taskSplitter[task_id].append(temp_release)
 				temp_release = temp_release + period
 
-		for task in taskSplitter:
-			task_idx = taskSplitter.index(task)
+
+		for i in range(len(taskSplitter)):
+			task_idx = i
 			counter  = 0
-			for release in task:
+			for release in taskSplitter[i]:
 				self.__jobs.append( [ self.__taskJson[task_idx][PROP['CompTime']],
 									release, 
 									release + self.__taskJson[task_idx][PROP['Deadline']] ,
@@ -171,6 +172,7 @@ class Scheduler():
 								  ]
 								)
 				counter += 1
+		
 		return self.__jobs
 
 	def FindPreemptionPoints(self):
