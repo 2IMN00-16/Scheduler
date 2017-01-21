@@ -103,7 +103,7 @@ class Scheduler():
 			self.__taskJson.append(tempTask)
 			taskID += 1
 
-		self.__hyperPeriod = readJson["Duration"]
+		self.__hyperPeriod = readJson["Duration"]+1
 
 
 		# The final data must look like this
