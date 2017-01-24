@@ -130,7 +130,9 @@ class Scheduler():
 
 		for job in self.__jobs:
 
-			self.__graspDeadlines.append([ "plot "+str(job[PARAM["Deadline"]]+job[PARAM["Release"]]),
+			if (job[PARAM["Deadline"]]+job[PARAM["Release"]]) < self.__hyperPeriod:
+
+				self.__graspDeadlines.append([ "plot "+str(job[PARAM["Deadline"]]+job[PARAM["Release"]]),
 											"jobDeadline",
 											"job"+str(job[PARAM["JobName"]])
 
